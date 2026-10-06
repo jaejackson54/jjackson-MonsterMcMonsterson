@@ -1,6 +1,6 @@
 public class Monster {
     // INSTANCE VARS
-    private final int health; 
+    private int health; 
     private int maxDmg; 
 
     // CONSTRUCTOR - Monster IS the return type
@@ -15,7 +15,7 @@ public class Monster {
     public int maxDmg(){ return maxDmg; }
 
     // MUTATORS
-    public void takeDmg(int change){
+    public void takeDmg(int dmg){
         health -= dmg; 
     }
 
