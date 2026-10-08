@@ -33,6 +33,8 @@ public class BattleMonster {
                 // check if there is a puppy
                 if(puppy != null){
                     // check if puppy attacks
+                    // 1 in 100 chance
+                    
                     johnWick();
                 }
                 // if no dog and no dog attack, roll for damage
