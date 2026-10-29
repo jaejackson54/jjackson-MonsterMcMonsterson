@@ -29,28 +29,26 @@ public class Game {
         gameLoop();
     }
     
-    // TODO: How much health, how many monsters, which items? Your choice.
+    // TODO: How much health, how many monters, which items? Your choice.
     private void setupGame() {
         // Create the GUI
         gui = new MonsterBattleGUI("Monster Battle - MY GAME");
         
-        // TODO: Setup player health
+      
         maxHealth = 100;  // Change this if you want
-        playerHealth = 100;
+        playerHealth = 75;
         gui.setPlayerMaxHealth(maxHealth);
         gui.updatePlayerHealth(playerHealth);
         
         // TODO: Create monsters - how many do you want?
         monsters = new ArrayList<>();
         monsters.add(new Monster());  // Add more monsters here!
-        monsters.add(new Monster());
         gui.updateMonsters(monsters);
         
         // TODO: Create starting items (GameDemo's addBomb() shows the shape)
         inventory = new ArrayList<>();
         gui.updateInventory(inventory);
         
-        // TODO: Customize button labels
         String[] buttons = {"Attack", "Defend", "Heal", "Use Item"};
         gui.setActionButtons(buttons);
         
