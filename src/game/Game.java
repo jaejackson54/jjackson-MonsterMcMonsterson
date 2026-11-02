@@ -12,6 +12,8 @@ public class Game {
     private ArrayList<Monster> monsters;
     private ArrayList<Item> inventory;
     private int playerHealth;
+    private int shield = 20;
+    private int SHIELD_UP; 
     private int maxHealth;
     
     public static void main(String[] args) {
@@ -24,22 +26,10 @@ public class Game {
         setupGame();
         gameLoop();
     }
-<<<<<<< HEAD
-    
-    // TODO: How much health, how many monters, which items? Your choice.
-=======
-
->>>>>>> e96af1fbe18dce82b52c5b35e9b83fc956012b9d
     private void setupGame() {
         // Create the GUI
         gui = new MonsterBattleGUI("James' Monster Battle");
-        
-<<<<<<< HEAD
-      
         maxHealth = 100;  // Change this if you want
-=======
-        maxHealth = 100;  
->>>>>>> e96af1fbe18dce82b52c5b35e9b83fc956012b9d
         playerHealth = 75;
         gui.setPlayerMaxHealth(maxHealth);
         gui.updatePlayerHealth(playerHealth);
@@ -110,18 +100,26 @@ public class Game {
         gui.displayMessage("JOHN WICK!");
         for(Monster m : monsters){
             // kill each one
-            m.takeDamage(maxHealth);
+            if(m != null) m.takeDamage(m.health());
         }
     }
     
-    // TODO: What does defending change? Less damage next turn? A blocked hit?
     private void defend() {
-        gui.displayMessage("TODO: Implement defend!");
+        shield += SHIELD_UP ;
+         gui.displayMessage("SHIELD UP! Current shield: " + shield);
     }
     
-    // TODO: How much health back, and can it go past maxHealth?
     private void heal() {
-        gui.displayMessage("TODO: Implement heal!");
+        // random number 0-40
+        int healNumber = 0; // WRONG
+        playerHealth += healNumber; 
+        if(playerHealth > maxHealth) {
+            maxHealth = playerHealth;
+            gui.setPlayerMaxHealth(maxHealth);
+        }  
+
+        gui.updatePlayerHealth(playerHealth);
+        gui.displayMessage("You healed for " + healNumber + " points!");
     }
     
     // Uses the first item in the inventory.
