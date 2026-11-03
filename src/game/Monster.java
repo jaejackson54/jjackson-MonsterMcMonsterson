@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import gui.MonsterBattleGUI;
 
 public class Monster {
@@ -33,11 +34,21 @@ public class Monster {
     public String special() { return this.special; }
 
     // MUTATOR METHODS
-    public void takeDamage(int dmg){
-        health -= dmg;
-    }
+    public void takeDamage(int dmg){health -= dmg; }
+    public void heal(int heal){health += heal; }
 
     // UTILITY METHODS
+    public void heal(Monster friend, int heal){
+        friend.heal(heal); 
+    }
+
+    public void jan6(ArrayList<Monster> monsters, MonsterBattleGUI gui){
+        for(Monster m : monsters){
+            if(m != null) m.twoFast2furious(gui);
+        }
+    }
+
+    // berserker mode
     public void twoFast2furious(MonsterBattleGUI gui){
         // lowers health to 25%, not less than 5
         health /= 4; 
@@ -48,6 +59,6 @@ public class Monster {
         speed *= 4; 
 
         // can we post a message?
-        gui.displayMessage("WARR!"); 
+        gui.displayMessage("WRARR!"); 
     }
 }

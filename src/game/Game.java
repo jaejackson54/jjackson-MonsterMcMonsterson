@@ -12,8 +12,8 @@ public class Game {
     private ArrayList<Monster> monsters;
     private ArrayList<Item> inventory;
     private int playerHealth;
-    private int shield = 20;
-    private int SHIELD_UP; 
+    private int shield = 0;
+    private int SHIELD_UP = 20; 
     private int maxHealth;
     
     public static void main(String[] args) {
@@ -105,13 +105,13 @@ public class Game {
     }
     
     private void defend() {
-        shield += SHIELD_UP ;
+        shield += SHIELD_UP;
          gui.displayMessage("SHIELD UP! Current shield: " + shield);
     }
     
     private void heal() {
-        // random number 0-40
-        int healNumber = 0; // WRONG
+        // random number 0-20
+        int healNumber = (int)(Math.random() * 10 + 10);
         playerHealth += healNumber; 
         if(playerHealth > maxHealth) {
             maxHealth = playerHealth;
