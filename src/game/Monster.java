@@ -43,9 +43,7 @@ public class Monster {
     }
 
     public void jan6(ArrayList<Monster> monsters, MonsterBattleGUI gui){
-        for(Monster m : monsters){
-            if(m != null) m.twoFast2furious(gui);
-        }
+        for(Monster m : monsters){m.twoFast2furious(gui);}
     }
 
     // berserker mode

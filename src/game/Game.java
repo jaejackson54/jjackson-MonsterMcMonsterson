@@ -29,13 +29,16 @@ public class Game {
     private void setupGame() {
         // Create the GUI
         gui = new MonsterBattleGUI("James' Monster Battle");
-        maxHealth = 100;  // Change this if you want
-        playerHealth = 75;
+
+        // TODO: Difficulty Selection
+
+        maxHealth = 100; 
+        playerHealth = 100;
         gui.setPlayerMaxHealth(maxHealth);
         gui.updatePlayerHealth(playerHealth);
         
         monsters = new ArrayList<>();
-        monsters.add(new Monster());  // Add more monsters here!
+        monsters.add(new Monster()); 
         gui.updateMonsters(monsters);
         
         // TODO: Create starting items (GameDemo's addBomb() shows the shape)
@@ -106,6 +109,7 @@ public class Game {
     
     private void defend() {
         shield += SHIELD_UP;
+        // EXTRA CREDIT: Show shield on GUI 
          gui.displayMessage("SHIELD UP! Current shield: " + shield);
     }
     
@@ -135,9 +139,11 @@ public class Game {
         item.use();  // The item knows what to do!
     }
     
-    // TODO: Which monster attacks, and for how much? A special move goes here.
     private void monsterAttack() {
-        gui.displayMessage("TODO: Implement monster attack!");
+        Monster monster = getRandomLivingMonster(); // TODO: Be smarter. Only one monster gets a turn?
+        playerHealth -= monster.damage();
+        gui.displayMessage("Monster hits for " + monster.damage());
+        gui.updatePlayerHealth(playerHealth);
     }
     
     // Helpers. Add your own below these two.
