@@ -26,6 +26,11 @@ public class Game {
         setupGame();
         gameLoop();
     }
+
+    // ACCESSORS
+    public MonsterBattleGUI getGUI(){return gui; }
+    public ArrayList<Monster> getMonsters() { return monsters; }
+
     private void setupGame() {
         // Create the GUI
         gui = new MonsterBattleGUI("James' Monster Battle");
@@ -38,7 +43,9 @@ public class Game {
         gui.updatePlayerHealth(playerHealth);
         
         monsters = new ArrayList<>();
-        monsters.add(new Monster()); 
+        monsters.add(new Monster(this)); 
+        monsters.add(new Monster(this, "pfundstein"));
+        monsters.add(new Monster(this, "Doc. T")); 
         gui.updateMonsters(monsters);
         
         // TODO: Create starting items (GameDemo's addBomb() shows the shape)
@@ -98,13 +105,15 @@ public class Game {
         }
     }
     
-    // TODO: How much damage, and to which monster?
     private void attackMonster() {
-        gui.displayMessage("JOHN WICK!");
-        for(Monster m : monsters){
-            // kill each one
-            if(m != null) m.takeDamage(m.health());
-        }
+        Monster target = getRandomLivingMonster();  // get random every time?
+        
+        // determine my damage
+         int damage = (int)(Math.random() * 15 + 10);
+        // apply damage
+        target.takeDamage(damage);
+        // show message
+        gui.displayMessage("Hit! You hit for " + damage + " points of damage!");
     }
     
     private void defend() {
@@ -115,7 +124,7 @@ public class Game {
     
     private void heal() {
         // random number 0-20
-        int healNumber = (int)(Math.random() * 30 + 10);
+        int healNumber = (int)(Math.random() * 10 + 10);
         playerHealth += healNumber; 
         if(playerHealth > maxHealth) {
             maxHealth = playerHealth;
