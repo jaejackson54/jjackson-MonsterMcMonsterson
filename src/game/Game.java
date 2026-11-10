@@ -115,7 +115,7 @@ public class Game {
     
     private void heal() {
         // random number 0-20
-        int healNumber = (int)(Math.random() * 10 + 10);
+        int healNumber = (int)(Math.random() * 30 + 10);
         playerHealth += healNumber; 
         if(playerHealth > maxHealth) {
             maxHealth = playerHealth;
