@@ -13,8 +13,8 @@ public class Monster {
         this.game = game; 
         // randomly generate health, damage, speed
         health = (int)(Math.random() * 80 + 1) + 20;
-        // random 10 - 50
-        damage = (Math.random() * 41) + 10;
+        
+        damage = (Math.random() * 21) + 10;
         // speed: random 1-10
         speed = (int)(Math.random() * 10) + 1;
         // by default, the monster doesn't have a special move
@@ -34,10 +34,12 @@ public class Monster {
     public int health() { return this.health; }
     public double damage() { 
         if(special.equals("pfundstein")) {
-            game.getGUI().displayMessage("Where's your YONDR?!");
+            game.getGUI().displayMessage("INFRACTION!");
+            damage = damage *= 1.25; 
         }
         if(special.equals("Doc. T")){
             game.getGUI().displayMessage("GOOD MORNING GILMOUR!");
+            damage = damage /= 2; 
         }
         return Math.round(damage * 100.0) / 100.0; }
     

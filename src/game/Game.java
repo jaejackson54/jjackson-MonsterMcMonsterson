@@ -54,8 +54,10 @@ public class Game {
         monsters.add(new Monster(this, "Doc. T"));
         gui.updateMonsters(monsters);
 
-        // TODO: Create starting items (GameDemo's addBomb() shows the shape)
         inventory = new ArrayList<>();
+        addHealthPotion(20);
+        addBomb(15);
+        addBazooka(30);
         gui.updateInventory(inventory);
 
         String[] buttons = { "Attack", "Defend", "Heal", "Use Item" };
@@ -130,7 +132,7 @@ public class Game {
 
     private void heal() {
         // random number 0-20
-        int healNumber = (int) (Math.random() * 10 + 10);
+        int healNumber = (int) (Math.random() * 20 + 10);
         playerHealth += healNumber;
         if (playerHealth > maxHealth) {
             maxHealth = playerHealth;
@@ -152,6 +154,48 @@ public class Game {
         Item item = inventory.remove(0);
         gui.updateInventory(inventory);
         item.use(); // The item knows what to do!
+    }
+
+    // ==================== ITEM CREATION HELPERS ====================
+    
+    /**
+     * Add a health potion to inventory
+     */
+    private void addHealthPotion(int healAmount) {
+        inventory.add(new Item("Health Potion", "🧪", () -> {
+            playerHealth = Math.min(maxHealth, playerHealth + healAmount);
+            gui.updatePlayerHealth(playerHealth);
+            gui.displayMessage("💚 Used Health Potion! Healed " + healAmount + " HP!");
+        }));
+    }
+    
+    /**
+     * Add a bomb to inventory (damages all monsters)
+     */
+    private void addBomb(int damage) {
+        inventory.add(new Item("Bomb", "💣", () -> {
+            for (Monster m : monsters) {
+                if (m.health() > 0) {
+                    m.takeDamage(damage);
+                }
+            }
+            gui.displayMessage("💣 BOOM! All monsters take " + damage + " damage!");
+            gui.updateMonsters(monsters);
+        }));
+
+    }
+
+    private void addBazooka(int damage) {
+        inventory.add(new Item("Bazooka", "💣", () -> {
+            for (Monster m : monsters) {
+                if (m.health() > 0) {
+                    m.takeDamage(damage * 2);
+                }
+            }
+            gui.displayMessage("💣 BOOM! All monsters take " + damage + " damage!");
+            gui.updateMonsters(monsters);
+        }));
+
     }
 
     private void monsterAttack() {
