@@ -57,7 +57,7 @@ public class Game {
         inventory = new ArrayList<>();
         addHealthPotion(20);
         addBomb(15);
-        addBazooka(30);
+        addGlock(30);
         gui.updateInventory(inventory);
 
         String[] buttons = { "Attack", "Defend", "Heal", "Use Item" };
@@ -185,14 +185,13 @@ public class Game {
 
     }
 
-    private void addBazooka(int damage) {
-        inventory.add(new Item("Bazooka", "💣", () -> {
-            for (Monster m : monsters) {
-                if (m.health() > 0) {
-                    m.takeDamage(damage * 2);
-                }
+    private void addGlock(int damage) {
+        inventory.add(new Item("Glock", "🔫", () -> {
+            Monster target = getRandomLivingMonster();
+            if(target != null){
+                target.takeDamage(damage);
             }
-            gui.displayMessage("💣 BOOM! All monsters take " + damage + " damage!");
+            gui.displayMessage("Bang 🔫!  All monsters take " + damage + " damage!");
             gui.updateMonsters(monsters);
         }));
 
